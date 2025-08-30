@@ -8,7 +8,6 @@ return {
   },
   lazy = false, -- neo-tree will lazily load itself
   config = function()
-    local builtin = require("telescope.builtin")
     vim.keymap.set("n", "<C-n>", ":Neotree filesystem toggle<CR>")
     require("neo-tree").setup({
       event_handlers = {
@@ -18,7 +17,6 @@ return {
             require("neo-tree.command").execute({ action = "close" })
           end
         },
-  
       }
     })
   end,
