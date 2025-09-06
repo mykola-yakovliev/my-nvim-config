@@ -1,38 +1,40 @@
-  return {
-    {
+return {
+  {
+    "mason-org/mason.nvim",
+    opts = {}
+  },
+  {
+    "mason-org/mason-lspconfig.nvim",
+    opts = {
+      ensure_installed = { "lua_ls", "ts_ls" },
+    },
+    dependencies = {
       "mason-org/mason.nvim",
-      opts = {}
+      "neovim/nvim-lspconfig",
     },
-    {
-      "mason-org/mason-lspconfig.nvim",
-      opts = {
-        ensure_installed = { "lua_ls", "ts_ls" },
-      },
-      dependencies = {
-        "mason-org/mason.nvim",
-        "neovim/nvim-lspconfig",
-      },
-      config = function(_, opts)
-        require("mason-lspconfig").setup(opts)
+    config = function(_, opts)
+      local mason_lspconfig = require("mason-lspconfig")
 
-        vim.api.nvim_create_autocmd("LspAttach", {
-          callback = function(args)
-            local bufnr = args.buf
-            local bufmap = function(mode, lhs, rhs, desc)
-              vim.keymap.set(mode, lhs, rhs, { buffer = bufnr, desc = desc })
-            end
+      mason_lspconfig.setup(opts)
 
-            -- Code Actions
-            bufmap("n", "<leader>ca", vim.lsp.buf.code_action, "Code Action")
-            bufmap("v", "<leader>ca", vim.lsp.buf.code_action, "Code Action (Visual)")
+      vim.api.nvim_create_autocmd("LspAttach", {
+        callback = function(args)
+          local bufnr = args.buf
+          local bufmap = function(mode, lhs, rhs, desc)
+            vim.keymap.set(mode, lhs, rhs, { buffer = bufnr, desc = desc })
+          end
 
-            -- Other useful LSP keymaps
-            bufmap("n", "gd", vim.lsp.buf.definition, "Go to Definition")
-            bufmap("n", "K", vim.lsp.buf.hover, "Hover Documentation")
-            bufmap("n", "<leader>rn", vim.lsp.buf.rename, "Rename Symbol")
-            bufmap("n", "gr", vim.lsp.buf.references, "Find References")
-          end,
-        })
-      end,
-    },
-  }
+          -- Code Actions
+          bufmap("n", "<leader>ca", vim.lsp.buf.code_action, "Code Action")
+          bufmap("v", "<leader>ca", vim.lsp.buf.code_action, "Code Action (Visual)")
+
+          -- Other useful LSP keymaps
+          bufmap("n", "gd", vim.lsp.buf.definition, "Go to Definition")
+          bufmap("n", "K", vim.lsp.buf.hover, "Hover Documentation")
+          bufmap("n", "<leader>rn", vim.lsp.buf.rename, "Rename Symbol")
+          bufmap("n", "gr", vim.lsp.buf.references, "Find References")
+        end,
+      })
+    end,
+  },
+}
