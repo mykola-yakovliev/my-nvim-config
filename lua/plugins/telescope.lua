@@ -10,6 +10,12 @@ return {
         defaults = {
           file_ignore_patterns = { "node_modules", "%.git" },
         },
+        pickers = {
+          find_files = {
+            hidden = true,
+            no_ignore = true
+          }
+        }
       })
 
       local builtin = require("telescope.builtin")
@@ -18,20 +24,19 @@ return {
     end,
   },
   {
-      "nvim-telescope/telescope-ui-select.nvim",
-      config = function()
-        local telescope = require("telescope")
+    "nvim-telescope/telescope-ui-select.nvim",
+    config = function()
+      local telescope = require("telescope")
 
-        telescope.setup({
-          extensions = {
-            ["ui-select"] = {
-              require("telescope.themes").get_dropdown({})
-            }
-          },
-        })
+      telescope.setup({
+        extensions = {
+          ["ui-select"] = {
+            require("telescope.themes").get_dropdown({})
+          }
+        },
+      })
 
-        telescope.load_extension("ui-select")
-      end,
-    },
-  }
-
+      telescope.load_extension("ui-select")
+    end,
+  },
+}

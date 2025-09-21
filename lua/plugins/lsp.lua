@@ -1,12 +1,12 @@
 return {
   {
     "mason-org/mason.nvim",
-    opts = {}
+    opts = {},
   },
   {
     "mason-org/mason-lspconfig.nvim",
     opts = {
-      ensure_installed = { "lua_ls", "ts_ls" },
+      ensure_installed = { "lua_ls", "ts_ls", "jsonls" },
     },
     dependencies = {
       "mason-org/mason.nvim",
@@ -16,6 +16,16 @@ return {
       local mason_lspconfig = require("mason-lspconfig")
 
       mason_lspconfig.setup(opts)
+
+      vim.diagnostic.config({
+        virtual_text = {
+          prefix = "●",
+        },
+        signs = true,
+        underline = true,
+        update_in_insert = false,
+        severity_sort = true,
+      })
 
       vim.api.nvim_create_autocmd("LspAttach", {
         callback = function(args)
@@ -33,6 +43,9 @@ return {
           bufmap("n", "K", vim.lsp.buf.hover, "Hover Documentation")
           bufmap("n", "<leader>rn", vim.lsp.buf.rename, "Rename Symbol")
           bufmap("n", "gr", vim.lsp.buf.references, "Find References")
+
+          bufmap("n", "[d", vim.diagnostic.goto_prev, "Previous Diagnostic")
+          bufmap("n", "]d", vim.diagnostic.goto_next, "Next Diagnostic")
         end,
       })
     end,
