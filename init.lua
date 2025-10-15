@@ -9,6 +9,10 @@ vim.api.nvim_create_user_command("MyConfig", function()
   vim.cmd("cd ~/AppData/Local/nvim")
 end, {})
 
+vim.api.nvim_create_user_command("MyLogs", function()
+  vim.cmd("cd ~/AppData/Local/nvim-data")
+end, {})
+
 vim.api.nvim_create_user_command("Repos", function()
   vim.cmd("cd ~/source/repos")
 end, {})

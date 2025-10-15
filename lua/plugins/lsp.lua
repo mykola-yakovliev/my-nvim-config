@@ -6,16 +6,14 @@ return {
   {
     "mason-org/mason-lspconfig.nvim",
     opts = {
-      ensure_installed = { "lua_ls", "ts_ls", "jsonls", "terraformls" },
+      ensure_installed = { "lua_ls", "ts_ls", "jsonls", "terraformls", "angularls" },
     },
     dependencies = {
       "mason-org/mason.nvim",
       "neovim/nvim-lspconfig",
     },
     config = function(_, opts)
-      local mason_lspconfig = require("mason-lspconfig")
-
-      mason_lspconfig.setup(opts)
+      require("mason-lspconfig").setup(opts)
 
       vim.diagnostic.config({
         virtual_text = {
