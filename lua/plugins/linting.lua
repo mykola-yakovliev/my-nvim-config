@@ -6,9 +6,12 @@ return {
     null_ls.setup({
       sources = {
         null_ls.builtins.formatting.stylua,
+        null_ls.builtins.formatting.terraform_fmt,
+        null_ls.builtins.formatting.yamlfmt,
       },
     })
 
     vim.keymap.set("n", "<leader>gf", vim.lsp.buf.format, {})
   end,
 }
+
