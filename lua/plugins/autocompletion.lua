@@ -3,16 +3,33 @@ return {
     "hrsh7th/cmp-nvim-lsp"
   },
   {
-    "hrsh7th/nvim-cmp",
+    "L3MON4D3/LuaSnip",
     dependencies = {
-      "hrsh7th/cmp-nvim-lsp",
-      "L3MON4D3/LuaSnip",
-      "hrsh7th/cmp-buffer",
-      "hrsh7th/cmp-path",
+      "rafamadriz/friendly-snippets",
       "saadparwaiz1/cmp_luasnip",
     },
     config = function()
+      require("luasnip.loaders.from_vscode").lazy_load()
+      require("luasnip.loaders.from_lua").lazy_load({
+        paths = vim.fn.stdpath("config") .. "/snippets",
+      })
+
+      local ls = require("luasnip")
+
+      vim.keymap.set({ "i", "s" }, "<Tab>", function() ls.jump(1) end, { silent = true })
+      vim.keymap.set({ "i", "s" }, "<S-Tab>", function() ls.jump(-1) end, { silent = true })
+    end,
+  },
+  {
+    "hrsh7th/nvim-cmp",
+    dependencies = {
+      "hrsh7th/cmp-nvim-lsp",
+      "hrsh7th/cmp-buffer",
+      "hrsh7th/cmp-path",
+    },
+    config = function()
       local cmp = require("cmp")
+
       cmp.setup({
         snippet = {
           expand = function(args)
@@ -34,19 +51,16 @@ return {
         }),
         sources = cmp.config.sources({
           { name = "nvim_lsp" },
+          { name = "luasnip" },
           { name = "buffer" },
           { name = "path" },
         }),
       })
-
-      local ls = require("luasnip")
-
-      vim.keymap.set({ "i", "s" }, "<Tab>", function() ls.jump(1) end, { silent = true })
-      vim.keymap.set({ "i", "s" }, "<S-Tab>", function() ls.jump(-1) end, { silent = true })
     end,
   },
   {
     "neovim/nvim-lspconfig",
+    lazy = false,
     config = function()
       local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
