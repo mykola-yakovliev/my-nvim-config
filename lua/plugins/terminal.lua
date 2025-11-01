@@ -14,14 +14,13 @@ return {
 
     require("toggleterm").setup({
       shell = shell_prog,
-
-      open_mapping = [[<c-\>]],
       start_in_insert = true,
       direction = "horizontal",
       size = 20,
       close_on_exit = true,
     })
 
+    vim.keymap.set('t', '<leader>te', [[<C-\><C-n>]], { noremap = true, silent = true })
     vim.keymap.set({ "n", "t" }, "<leader>tt", "<cmd>ToggleTerm<CR>", { noremap = true, silent = true })
     vim.keymap.set({ "n", "t" }, "<leader>tn", function()
       require("toggleterm.terminal").Terminal:new():toggle()
