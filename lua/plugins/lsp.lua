@@ -40,7 +40,7 @@ return {
           bufmap("n", "gd", vim.lsp.buf.definition, "Go to Definition")
           bufmap("n", "K", vim.lsp.buf.hover, "Hover Documentation")
           bufmap("n", "<leader>rn", vim.lsp.buf.rename, "Rename Symbol")
-          bufmap("n", "gr", vim.lsp.buf.references, "Find References")
+          bufmap("n", "fr", vim.lsp.buf.references, "Find References")
 
           bufmap("n", "[d", vim.diagnostic.goto_prev, "Previous Diagnostic")
           bufmap("n", "]d", vim.diagnostic.goto_next, "Next Diagnostic")
