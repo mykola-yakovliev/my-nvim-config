@@ -20,8 +20,9 @@ return {
       close_on_exit = true,
     })
 
-    vim.keymap.set('t', '<leader>te', [[<C-\><C-n>]], { noremap = true, silent = true })
+    vim.keymap.set('t', '<leader>tq', [[<C-\><C-n>]], { noremap = true, silent = true })
     vim.keymap.set({ "n", "t" }, "<leader>tt", "<cmd>ToggleTerm<CR>", { noremap = true, silent = true })
+    vim.keymap.set({ "n", "t" }, "<leader>ts", "<cmd>TermSelect<CR>", { noremap = true, silent = true })
     vim.keymap.set({ "n", "t" }, "<leader>tn", function()
       require("toggleterm.terminal").Terminal:new():toggle()
     end, { noremap = true, silent = true })
