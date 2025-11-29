@@ -26,6 +26,7 @@ return {
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-path",
+      "kristijanhusak/vim-dadbod-completion",
     },
     config = function()
       local cmp = require("cmp")
@@ -54,6 +55,8 @@ return {
           { name = "luasnip" },
           { name = "buffer" },
           { name = "path" },
+        }, {
+          { name = "vim-dadbod-completion" },
         }),
       })
     end,
