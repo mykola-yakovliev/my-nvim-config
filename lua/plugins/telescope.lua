@@ -2,7 +2,10 @@ return {
   {
     "nvim-telescope/telescope.nvim",
     tag = "0.1.8",
-    dependencies = { "nvim-lua/plenary.nvim" },
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "jvgrootveld/telescope-zoxide",
+    },
     config = function()
       local telescope = require("telescope")
 
@@ -15,7 +18,7 @@ return {
             hidden = true,
             no_ignore = true
           }
-        }
+        },
       })
 
       local builtin = require("telescope.builtin")
@@ -32,12 +35,17 @@ return {
         extensions = {
           ["ui-select"] = {
             require("telescope.themes").get_dropdown({})
+          },
+          zoxide = {
+            prompt_title = "Select location",
           }
-        },
+        }
       })
 
       telescope.load_extension("ui-select")
+      telescope.load_extension("zoxide")
+
+      vim.keymap.set("n", "<C-z>", telescope.extensions.zoxide.list)
     end,
   },
 }
-
