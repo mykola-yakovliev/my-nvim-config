@@ -7,15 +7,11 @@ vim.wo.relativenumber = true
 vim.wo.number = true
 
 vim.api.nvim_create_user_command("MyConfig", function()
-  vim.cmd("cd ~/AppData/Local/nvim")
+  vim.cmd.cd(vim.fn.stdpath("config"))
 end, {})
 
 vim.api.nvim_create_user_command("MyLogs", function()
-  vim.cmd("cd ~/AppData/Local/nvim-data")
-end, {})
-
-vim.api.nvim_create_user_command("Repos", function()
-  vim.cmd("cd ~/source/repos")
+  vim.cmd.cd(vim.fn.stdpath("data"))
 end, {})
 
 require("config.lazy")
