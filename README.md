@@ -9,3 +9,4 @@ Required tools:
 - lazygit
 - C-compiler (for example, gcc)
 - dotnet
+- [netcoredbg](https://github.com/Samsung/netcoredbg)
