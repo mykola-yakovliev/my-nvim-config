@@ -10,3 +10,4 @@ Required tools:
 - C-compiler (for example, gcc)
 - dotnet
 - [netcoredbg](https://github.com/Samsung/netcoredbg)
+- yazi
