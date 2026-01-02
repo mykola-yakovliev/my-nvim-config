@@ -13,7 +13,7 @@ return {
 
       telescope.setup({
         defaults = {
-          file_ignore_patterns = { "node_modules", "%.git", "bin", "obj", ".terraform", ".angular" },
+          file_ignore_patterns = { "node_modules", "%.git", "bin", "obj", ".terraform", "%.angular/" },
         },
         pickers = {
           find_files = {
