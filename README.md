@@ -6,7 +6,7 @@ Required tools:
 - curl
 - tar
 - [nerd fonts](https://www.nerdfonts.com/)
-- lazygit
+- lazygit, lazydocker
 - C-compiler (for example, gcc)
 - dotnet
 - [netcoredbg](https://github.com/Samsung/netcoredbg)
