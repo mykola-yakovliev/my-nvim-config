@@ -11,9 +11,11 @@ return {
 		dependencies = {
 			"mason-org/mason.nvim",
 			"neovim/nvim-lspconfig",
+			"smjonas/inc-rename.nvim",
 		},
 		config = function(_, opts)
 			require("mason-lspconfig").setup(opts)
+			require("inc_rename").setup()
 
 			vim.diagnostic.config({
 				virtual_text = {
@@ -27,24 +29,43 @@ return {
 
 			vim.api.nvim_create_autocmd("LspAttach", {
 				callback = function(args)
+					local tb = require("telescope.builtin")
 					local bufnr = args.buf
-					local bufmap = function(mode, lhs, rhs, desc)
-						vim.keymap.set(mode, lhs, rhs, { buffer = bufnr, desc = desc })
+
+					local function buf_opts(desc)
+						return { buffer = bufnr, desc = desc }
 					end
 
-					-- Code Actions
-					bufmap("n", "<leader>ca", vim.lsp.buf.code_action, "Code Action")
-					bufmap("v", "<leader>ca", vim.lsp.buf.code_action, "Code Action (Visual)")
+					vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, buf_opts("Code Action"))
 
-					-- Other useful LSP keymaps
-					bufmap("n", "gd", vim.lsp.buf.definition, "Go to Definition")
-					bufmap("n", "gi", vim.lsp.buf.implementation, "Go to Implementation")
-					bufmap("n", "K", vim.lsp.buf.hover, "Hover Documentation")
-					bufmap("n", "<leader>rn", vim.lsp.buf.rename, "Rename Symbol")
-					bufmap("n", "fr", vim.lsp.buf.references, "Find References")
+					vim.keymap.set("n", "gd", tb.lsp_definitions, buf_opts("Go to Definition"))
+					vim.keymap.set("n", "gi", tb.lsp_implementations, buf_opts("Go to Implementation"))
+					vim.keymap.set("n", "gt", tb.lsp_type_definitions, buf_opts("Go to Type Definition"))
+					vim.keymap.set("n", "gr", tb.lsp_references, buf_opts("Go to References"))
 
-					bufmap("n", "[d", vim.diagnostic.goto_prev, "Previous Diagnostic")
-					bufmap("n", "]d", vim.diagnostic.goto_next, "Next Diagnostic")
+					vim.keymap.set("n", "fr", function()
+						require("telescope.builtin").lsp_references({
+							include_declaration = false,
+							show_line = true,
+						})
+					end, buf_opts("Find References"))
+
+					vim.keymap.set("n", "<leader>dw", tb.diagnostics, buf_opts("Workspace Diagnostics"))
+					vim.keymap.set("n", "<leader>dc", function()
+						tb.diagnostics({ bufnr = 0 })
+					end, buf_opts("Buffer Diagnostics"))
+					vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, buf_opts("Previous Diagnostic"))
+					vim.keymap.set("n", "]d", vim.diagnostic.goto_next, buf_opts("Next Diagnostic"))
+
+					vim.keymap.set("n", "K", vim.lsp.buf.hover, buf_opts("Hover Documentation"))
+
+					vim.keymap.set("n", "<leader>rn", function()
+						if vim.fn.exists(":IncRename") == 2 then
+							return ":IncRename " .. vim.fn.expand("<cword>")
+						else
+							vim.lsp.buf.rename()
+						end
+					end, { buffer = bufnr, expr = true, desc = "Rename Symbol" })
 				end,
 			})
 		end,
