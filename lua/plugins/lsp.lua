@@ -4,6 +4,38 @@ return {
 		opts = {},
 	},
 	{
+		"neovim/nvim-lspconfig",
+		dependencies = {
+			"hrsh7th/cmp-nvim-lsp",
+			"qvalentin/helm-ls.nvim",
+		},
+		lazy = false,
+		config = function()
+			local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
+			vim.lsp.config("*", {
+				capabilities = capabilities,
+			})
+
+			vim.lsp.enable("helm_ls")
+			vim.lsp.config("helm_ls", {
+				settings = {
+					["helm-ls"] = {
+						yamlls = {
+							enabled = false,
+						},
+					},
+				},
+			})
+
+			vim.lsp.enable("yamlls")
+		end,
+	},
+	{
+		"qvalentin/helm-ls.nvim",
+		ft = "helm",
+	},
+	{
 		"mason-org/mason-lspconfig.nvim",
 		opts = {
 			ensure_installed = { "lua_ls", "ts_ls", "jsonls", "terraformls", "angularls" },
