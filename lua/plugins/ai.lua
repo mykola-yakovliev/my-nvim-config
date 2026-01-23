@@ -37,7 +37,33 @@ return {
 						},
 					},
 				},
+				display = {
+					action_palette = {
+						width = 95,
+						height = 10,
+						prompt = "Prompt ",
+						provider = "telescope",
+						opts = {
+							show_preset_actions = true,
+							show_preset_prompts = true,
+							title = "CodeCompanion actions",
+						},
+					},
+				},
 			})
+
+			vim.keymap.set(
+				"n",
+				"<leader>Ct",
+				"<Cmd>CodeCompanionChat Toggle<CR>",
+				{ desc = "Toggle AI chat" }
+			)
+			vim.keymap.set(
+				"n",
+				"<leader>Ca",
+				"<Cmd>CodeCompanionActions<CR>",
+				{ desc = "Show CodeCompanion Actions" }
+			)
 		end,
 	},
 }
