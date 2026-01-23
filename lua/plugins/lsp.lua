@@ -89,7 +89,9 @@ return {
 					vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, buf_opts("Previous Diagnostic"))
 					vim.keymap.set("n", "]d", vim.diagnostic.goto_next, buf_opts("Next Diagnostic"))
 
-					vim.keymap.set("n", "K", vim.lsp.buf.hover, buf_opts("Hover Documentation"))
+					vim.keymap.set("n", "K", function()
+						vim.lsp.buf.hover({ border = "rounded", max_width = 80, max_height = 20 })
+					end, buf_opts("View Documentation"))
 
 					vim.keymap.set("n", "<leader>rn", function()
 						if vim.fn.exists(":IncRename") == 2 then
@@ -108,8 +110,8 @@ return {
 		priority = 1000,
 		config = function()
 			require("tiny-inline-diagnostic").setup({
-        preset = "simple",
-      })
+				preset = "simple",
+			})
 			vim.diagnostic.config({ virtual_text = false })
 		end,
 	},
