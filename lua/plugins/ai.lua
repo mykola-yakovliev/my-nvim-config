@@ -50,20 +50,42 @@ return {
 						},
 					},
 				},
+				adapters = {
+					http = {
+						my_ai_hub = function()
+							return require("codecompanion.adapters").extend("openai_compatible", {
+								env = {
+									url = vim.env.AI_HUB_URL,
+									api_key = vim.env.AI_API_KEY,
+								},
+							})
+						end,
+					},
+				},
+				interactions = {
+					chat = {
+						adapter = {
+							name = "my_ai_hub",
+							model = "claude-haiku-*",
+						},
+					},
+					inline = {
+						adapter = {
+							name = "my_ai_hub",
+							model = "gpt-4.1-mini",
+						},
+					},
+					cmd = {
+						adapter = {
+							name = "my_ai_hub",
+							model = "gemini-2.5-pro",
+						},
+					},
+				},
 			})
 
-			vim.keymap.set(
-				"n",
-				"<leader>Ct",
-				"<Cmd>CodeCompanionChat Toggle<CR>",
-				{ desc = "Toggle AI chat" }
-			)
-			vim.keymap.set(
-				"n",
-				"<leader>Ca",
-				"<Cmd>CodeCompanionActions<CR>",
-				{ desc = "Show CodeCompanion Actions" }
-			)
+			vim.keymap.set("n", "<leader>Ct", "<Cmd>CodeCompanionChat Toggle<CR>", { desc = "Toggle AI chat" })
+			vim.keymap.set("n", "<leader>Ca", "<Cmd>CodeCompanionActions<CR>", { desc = "Show CodeCompanion Actions" })
 		end,
 	},
 }
