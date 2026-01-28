@@ -1,18 +1,32 @@
 return {
 	{
-		"github/copilot.vim",
-		init = function()
-			vim.g.copilot_assume_mapped = true
-			vim.g.copilot_no_tab_map = true
-		end,
+		"zbirenbaum/copilot.lua",
+		event = "InsertEnter",
 		config = function()
-			vim.keymap.set("i", "<C-l>", 'copilot#Accept("\\<CR>")', {
-				expr = true,
-				replace_keycodes = false,
+			require("copilot").setup({
+				suggestion = {
+					enabled = true,
+					auto_trigger = true,
+					debounce = 75,
+					keymap = {
+						accept = "<C-l>",
+						next = "<C-j>",
+						prev = "<C-k>",
+						dismiss = "<C-h>",
+					},
+				},
+				panel = {
+					enabled = false,
+				},
+				disable_limit_reached_message = true,
 			})
-			vim.keymap.set("i", "<C-j>", "<Plug>(copilot-next)")
-			vim.keymap.set("i", "<C-k>", "<Plug>(copilot-previous)")
-			vim.keymap.set("i", "<C-h>", "<Plug>(copilot-dismiss)")
+		end,
+	},
+	{
+		"zbirenbaum/copilot-cmp",
+		after = { "copilot.lua" },
+		config = function()
+			require("copilot_cmp").setup()
 		end,
 	},
 	{
