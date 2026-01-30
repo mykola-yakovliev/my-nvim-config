@@ -8,7 +8,10 @@ return {
 		local dotnet = require("easy-dotnet")
 		dotnet.setup({
 			debugger = {
-				bin_path = 'netcoredbg'
+				bin_path = "netcoredbg",
+			},
+			notifications = {
+				handler = false,
 			},
 		})
 
