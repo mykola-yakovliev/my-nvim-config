@@ -10,9 +10,5 @@ vim.api.nvim_create_user_command("MyConfig", function()
   vim.cmd.cd(vim.fn.stdpath("config"))
 end, {})
 
-vim.api.nvim_create_user_command("MyLogs", function()
-  vim.cmd.cd(vim.fn.stdpath("data"))
-end, {})
-
 require("config.lazy")
 
