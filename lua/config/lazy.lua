@@ -35,14 +35,6 @@ lazy.setup({
 vim.api.nvim_create_autocmd("VimEnter", {
 	once = true,
 	callback = function()
-		lazy.check({ show = false })
-	end,
-})
-
-vim.api.nvim_create_autocmd("User", {
-	pattern = "LazyCheck",
-	callback = function()
     lazy.update({ show = false })
 	end,
 })
-
