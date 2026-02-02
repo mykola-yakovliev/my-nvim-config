@@ -42,18 +42,7 @@ vim.api.nvim_create_autocmd("VimEnter", {
 vim.api.nvim_create_autocmd("User", {
 	pattern = "LazyCheck",
 	callback = function()
-    local count = (require("lazy.status").updates() or 0)
-    if count > 0 then
-      vim.notify("Detected " .. count .. " plugin(s) ready for update. Updating...", vim.log.levels.INFO)
-      lazy.update({ show = false })
-		end
+    lazy.update({ show = false })
 	end,
 })
 
-vim.api.nvim_create_autocmd("User", {
-	pattern = "LazyUpdate",
-	once = true,
-	callback = function()
-		vim.notify("Plugins updated.", vim.log.levels.INFO)
-	end,
-})
