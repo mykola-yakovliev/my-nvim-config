@@ -37,6 +37,7 @@ return {
 			"nvim-lua/plenary.nvim",
 			"nvim-treesitter/nvim-treesitter",
 			"ravitemer/mcphub.nvim",
+			"franco-ruggeri/codecompanion-spinner.nvim",
 		},
 		config = function()
 			require("mcphub").setup()
@@ -50,6 +51,7 @@ return {
 							show_result_in_chat = true,
 						},
 					},
+          spinner = {},
 				},
 				display = {
 					action_palette = {
