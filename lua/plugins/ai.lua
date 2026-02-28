@@ -42,6 +42,13 @@ return {
 		config = function()
 			require("mcphub").setup()
 			require("codecompanion").setup({
+				prompt_library = {
+					markdown = {
+						dirs = {
+							vim.fn.getcwd() .. "/.prompts", -- Can be relative
+						},
+					},
+				},
 				extensions = {
 					mcphub = {
 						callback = "mcphub.extensions.codecompanion",
@@ -51,7 +58,7 @@ return {
 							show_result_in_chat = true,
 						},
 					},
-          spinner = {},
+					spinner = {},
 				},
 				display = {
 					action_palette = {
@@ -82,19 +89,19 @@ return {
 					chat = {
 						adapter = {
 							name = "my_ai_hub",
-							model = "claude-haiku-*",
+							model = vim.env.AI_CHAT_MODEL,
 						},
 					},
 					inline = {
 						adapter = {
 							name = "my_ai_hub",
-							model = "gpt-4.1-mini",
+							model = vim.env.AI_INLINE_MODEL,
 						},
 					},
 					cmd = {
 						adapter = {
 							name = "my_ai_hub",
-							model = "gemini-2.5-pro",
+							model = vim.env.AI_CMD_MODEL,
 						},
 					},
 				},
