@@ -1,35 +1,5 @@
 return {
 	{
-		"zbirenbaum/copilot.lua",
-		event = "InsertEnter",
-		config = function()
-			require("copilot").setup({
-				suggestion = {
-					enabled = true,
-					auto_trigger = true,
-					debounce = 75,
-					keymap = {
-						accept = "<C-l>",
-						next = "<C-j>",
-						prev = "<C-k>",
-						dismiss = "<C-h>",
-					},
-				},
-				panel = {
-					enabled = false,
-				},
-				disable_limit_reached_message = true,
-			})
-		end,
-	},
-	{
-		"zbirenbaum/copilot-cmp",
-		after = { "copilot.lua" },
-		config = function()
-			require("copilot_cmp").setup()
-		end,
-	},
-	{
 		"olimorris/codecompanion.nvim",
 		version = "^18.0.0",
 		opts = {},
