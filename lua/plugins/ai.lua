@@ -81,4 +81,35 @@ return {
 			vim.keymap.set("n", "<leader>Ca", "<Cmd>CodeCompanionActions<CR>", { desc = "Show CodeCompanion Actions" })
 		end,
 	},
+	{
+		"nickjvandyke/opencode.nvim",
+		version = "*",
+		config = function()
+			vim.o.autoread = true -- Required for event-based reload
+
+			-- Configure opencode options
+			vim.g.opencode_opts = {
+				ui = {
+					persist_state = true,
+				},
+			}
+
+      vim.keymap.set({ "n", "t" }, "<leader>Oc", function()
+        require("opencode").toggle()
+      end, { desc = "Toggle opencode" })
+			vim.keymap.set({ "n", "x" }, "<leader>Oa", function()
+				require("opencode").ask("@this: ", { submit = true })
+			end, { desc = "Ask opencode…" })
+			vim.keymap.set({ "n", "x" }, "<leader>Oe", function()
+				require("opencode").select()
+			end, { desc = "Execute opencode action…" })
+
+			-- vim.keymap.set("n", "<S-C-u>", function()
+			-- 	require("opencode").command("session.half.page.up")
+			-- end, { desc = "Scroll opencode up" })
+			-- vim.keymap.set("n", "<S-C-d>", function()
+			-- 	require("opencode").command("session.half.page.down")
+			-- end, { desc = "Scroll opencode down" })
+		end,
+	},
 }
