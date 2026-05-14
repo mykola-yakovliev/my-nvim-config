@@ -30,6 +30,7 @@ lazy.setup({
 	},
 	install = { colorscheme = { "habamax" } },
 	checker = { enabled = false },
+	rocks = { hererocks = false },
 })
 
 vim.api.nvim_create_autocmd("VimEnter", {
