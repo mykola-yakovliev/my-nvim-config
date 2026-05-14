@@ -6,6 +6,8 @@ vim.cmd("set shiftwidth=2")
 vim.wo.relativenumber = true
 vim.wo.number = true
 
+vim.opt.scrolloff = 8
+
 vim.api.nvim_create_user_command("MyConfig", function()
   vim.cmd.cd(vim.fn.stdpath("config"))
 end, {})
