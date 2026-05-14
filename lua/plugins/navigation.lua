@@ -41,9 +41,15 @@ return {
 		keys = {
 			{
 				"<leader>yt",
-        mode = { "n", "v" },
-        "<cmd>Yazi toggle<cr>",
-        desc = "Toggle Yazi",
+				mode = { "n", "v" },
+				"<cmd>Yazi toggle<cr>",
+				desc = "Toggle Yazi",
+			},
+			{
+				"<leader>yf",
+				mode = { "n", "v" },
+				"<cmd>Yazi<cr>",
+				desc = "Open file in Yazi",
 			},
 		},
 	},
