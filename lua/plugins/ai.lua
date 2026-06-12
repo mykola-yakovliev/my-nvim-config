@@ -87,29 +87,24 @@ return {
 		config = function()
 			vim.o.autoread = true -- Required for event-based reload
 
-			-- Configure opencode options
-			vim.g.opencode_opts = {
-				ui = {
-					persist_state = true,
-				},
-			}
+			local opencode_term = require("toggleterm.terminal").Terminal:new({
+				cmd = "opencode",
+				hidden = true,
+				direction = "vertical",
+				on_open = function()
+					vim.cmd("vertical resize " .. math.floor(vim.o.columns * 0.5))
+				end,
+			})
 
-      vim.keymap.set({ "n", "t" }, "<leader>Oc", function()
-        require("opencode").toggle()
-      end, { desc = "Toggle opencode" })
+			vim.keymap.set({ "n", "t" }, "<leader>Oc", function()
+				opencode_term:toggle()
+			end, { desc = "Toggle opencode" })
 			vim.keymap.set({ "n", "x" }, "<leader>Oa", function()
 				require("opencode").ask("@this: ", { submit = true })
 			end, { desc = "Ask opencode…" })
 			vim.keymap.set({ "n", "x" }, "<leader>Oe", function()
 				require("opencode").select()
 			end, { desc = "Execute opencode action…" })
-
-			-- vim.keymap.set("n", "<S-C-u>", function()
-			-- 	require("opencode").command("session.half.page.up")
-			-- end, { desc = "Scroll opencode up" })
-			-- vim.keymap.set("n", "<S-C-d>", function()
-			-- 	require("opencode").command("session.half.page.down")
-			-- end, { desc = "Scroll opencode down" })
 		end,
 	},
 }
