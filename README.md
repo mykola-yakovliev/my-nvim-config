@@ -11,3 +11,4 @@ Required tools:
 - dotnet
 - [netcoredbg](https://github.com/Samsung/netcoredbg)
 - yazi
+- opencode
