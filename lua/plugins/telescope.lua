@@ -14,7 +14,8 @@ return {
 
 			telescope.setup({
 				defaults = {
-					file_ignore_patterns = { "node_modules", "%.git", "bin", "obj", ".terraform", "%.angular/", "dist" },
+					file_ignore_patterns = { "node_modules", "%.git", "bin", "obj", ".terraform", "%.angular/" },
+					path_display = { "smart" },
 				},
 				pickers = {
 					find_files = {
@@ -29,8 +30,7 @@ return {
 					zoxide = {
 						prompt_title = "Select location",
 					},
-          persisted = {
-          },
+					persisted = {},
 				},
 			})
 
