@@ -16,6 +16,14 @@ return {
 				defaults = {
 					file_ignore_patterns = { "node_modules", "%.git", "bin", "obj", ".terraform", "%.angular/" },
 					path_display = { "smart" },
+					layout_strategy = "horizontal",
+					layout_config = {
+						horizontal = {
+							width = 0.9,
+							height = 0.9,
+							preview_width = 0.6,
+						},
+					},
 				},
 				pickers = {
 					find_files = {
@@ -44,6 +52,14 @@ return {
 			vim.keymap.set("n", "<C-p>", builtin.find_files, { desc = "Telescope find files" })
 			vim.keymap.set("n", "<C-f>", telescope.extensions.live_grep_args.live_grep_args)
 			vim.keymap.set("n", "<C-z>", telescope.extensions.zoxide.list)
+
+			vim.api.nvim_create_autocmd("User", {
+				pattern = "TelescopePreviewerLoaded",
+				callback = function(args)
+					vim.wo.number = true
+					vim.wo.relativenumber = false
+				end,
+			})
 		end,
 	},
 }
