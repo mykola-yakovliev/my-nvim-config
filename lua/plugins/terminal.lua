@@ -1,5 +1,8 @@
 return {
 	"akinsho/toggleterm.nvim",
+	dependencies = {
+		"declancm/maximize.nvim",
+	},
 	version = "*",
 	config = function()
 		require("toggleterm").setup({
@@ -13,6 +16,11 @@ return {
 		local Terminal = require("toggleterm.terminal").Terminal
 
 		vim.keymap.set("t", "<leader>tq", [[<C-\><C-n>]], { noremap = true, silent = true })
+		vim.keymap.set("t", "<leader>wm", [[<C-\><C-n><cmd>Maximize<CR>]], {
+			noremap = true,
+			silent = true,
+		})
+
 		vim.keymap.set({ "n", "t" }, "<leader>tt", "<cmd>ToggleTerm<CR>", { noremap = true, silent = true })
 		vim.keymap.set({ "n", "t" }, "<leader>ts", "<cmd>TermSelect<CR>", { noremap = true, silent = true })
 		vim.keymap.set({ "n", "t" }, "<leader>tn", function()
