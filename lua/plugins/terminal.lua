@@ -2,26 +2,8 @@ return {
 	"akinsho/toggleterm.nvim",
 	version = "*",
 	config = function()
-		local shell_prog = nil
-
-		-- Linux
-		if vim.fn.executable("bash") == 1 then
-			shell_prog = "bash"
-		elseif vim.fn.executable("sh") == 1 then
-			shell_prog = "sh"
-
-		-- Windows
-		elseif vim.fn.executable("pwsh") == 1 then
-			shell_prog = "pwsh.exe"
-		elseif vim.fn.executable("powershell") == 1 then
-			shell_prog = "powershell.exe"
-		else
-			-- fallback, e.g. cmd.exe
-			shell_prog = "cmd.exe"
-		end
-
 		require("toggleterm").setup({
-			shell = shell_prog,
+			shell = vim.fn.fnamemodify(vim.uv.os_getenv("SHELL"), ":t"),
 			start_in_insert = true,
 			direction = "horizontal",
 			size = 20,
