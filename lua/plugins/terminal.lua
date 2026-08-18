@@ -40,6 +40,7 @@ return {
 
 		local lazygit = create_terminal("lazygit")
 		local lazydocker = create_terminal("lazydocker")
+		local lazysql = create_terminal("lazysql")
 
 		vim.keymap.set("n", "<leader>lg", function()
 			lazygit:toggle()
@@ -47,6 +48,10 @@ return {
 
 		vim.keymap.set("n", "<leader>ld", function()
 			lazydocker:toggle()
+		end, { noremap = true, silent = true })
+
+		vim.keymap.set("n", "<leader>ls", function()
+			lazysql:toggle()
 		end, { noremap = true, silent = true })
 
 		vim.api.nvim_create_autocmd("DirChanged", {
