@@ -26,6 +26,8 @@ return {
 			vim.keymap.set("n", "<C-h>", ":bp<CR>", { noremap = true, silent = true })
 			vim.keymap.set("n", "<C-l>", ":bn<CR>", { noremap = true, silent = true })
 
+			vim.keymap.set("n", "<leader>bn", ":enew<CR>", { noremap = true, silent = true })
+
 			vim.keymap.set("n", "<leader>bc", ":BufferLineCloseOthers<CR>", { noremap = true, silent = true })
 			vim.keymap.set("n", "<leader>bs", ":BufferLinePick<CR>", { noremap = true, silent = true })
 		end,
