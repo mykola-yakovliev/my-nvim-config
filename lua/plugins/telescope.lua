@@ -14,6 +14,11 @@ return {
 
 			telescope.setup({
 				defaults = {
+					debounce = 150,
+					preview = {
+						filesize_limit = 1,
+						timeout = 250,
+					},
 					file_ignore_patterns = { "node_modules", "%.git", "bin", "obj", ".terraform", "%.angular/", "dist" },
 					path_display = { "smart" },
 					layout_strategy = "horizontal",
