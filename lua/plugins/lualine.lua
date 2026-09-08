@@ -9,6 +9,7 @@ return {
 			},
 			sections = {
 				lualine_a = { "mode", job_indicator },
+				lualine_z = { "%l/%L" },
 			},
 		}
 	end,
