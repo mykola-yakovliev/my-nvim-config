@@ -9,6 +9,9 @@ return {
         integrations = {
           treesitter = true,
           telescope = true,
+          nvim_scrollbar = true,
+          gitsigns = true,
+          hlslens = true,
         },
         custom_highlights = function(colors)
           return {
