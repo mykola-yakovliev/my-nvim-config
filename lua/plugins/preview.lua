@@ -4,15 +4,15 @@ local function smart_preview()
 	local ext = vim.fn.fnamemodify(file, ":e"):lower()
 
 	if ft == "markdown" or ext == "md" or ft == "mermaid" or ext == "mmd" or ext == "mermaid" then
-		require("lazy").load({ plugins = { "markdown-preview.nvim" } })
-		vim.cmd("MarkdownPreview")
+		require("lazy").load({ plugins = { "mdkite.nvim" } })
+		vim.cmd("MdKite start")
 	elseif ft == "plantuml" or ext == "puml" or ext == "plantuml" or ext == "pu" or ext == "iuml" then
 		require("lazy").load({ plugins = { "plantuml.nvim" } })
 		vim.cmd("PlantumlLaunchBrowser")
 	elseif ft == "svg" or ext == "svg" or ft == "html" or ext == "html" or ext == "htm" then
-		require("lazy").load({ plugins = { "live-server.nvim" } })
-		local ls = require("live_server")
-		ls.start_picker()
+		require("lazy").load({ plugins = { "kitehost.nvim" } })
+		local kite = require("kitehost")
+		kite.start_picker()
 	elseif file ~= "" then
 		vim.ui.open(file)
 	else
@@ -26,11 +26,11 @@ local function smart_preview_stop()
 	local ext = vim.fn.fnamemodify(file, ":e"):lower()
 
 	if ft == "markdown" or ext == "md" or ft == "mermaid" or ext == "mmd" or ext == "mermaid" then
-		vim.cmd("MarkdownPreviewStop")
+		vim.cmd("MdKite stop")
 	elseif ft == "plantuml" or ext == "puml" or ext == "plantuml" or ext == "pu" then
 		vim.cmd("PlantumlServerStop")
 	elseif ft == "svg" or ext == "svg" or ft == "html" or ext == "html" then
-		vim.cmd("LiveServerStopAll")
+		vim.cmd("KiteHost stop-all")
 	end
 end
 
@@ -42,10 +42,10 @@ vim.keymap.set("n", "<leader>oq", smart_preview_stop, { desc = "Stop Preview" })
 
 return {
 	{
-		"selimacerbas/markdown-preview.nvim",
-		dependencies = { "selimacerbas/live-server.nvim" },
+		"selimacerbas/mdkite.nvim",
+		dependencies = { "selimacerbas/kitehost.nvim" },
 		ft = { "markdown", "mermaid", "mmd" },
-		cmd = { "MarkdownPreview", "MarkdownPreviewStop", "MarkdownPreviewRefresh" },
+		cmd = { "MdKite", "MdKite stop", "MdKite refresh" },
 		opts = {
 			instance_mode = "takeover",
 			open_browser = true,
@@ -54,17 +54,12 @@ return {
 		},
 	},
 	{
-		"selimacerbas/live-server.nvim",
+		"selimacerbas/kitehost.nvim",
 		cmd = {
-			"LiveServerStart",
-			"LiveServerStop",
-			"LiveServerStopAll",
-			"LiveServerReload",
-			"LiveServerOpen",
-			"LiveServerStatus",
+			"KiteHost",
 		},
 		opts = {
-			open_browser = true,
+			open_on_start = true,
 		},
 	},
 	{
