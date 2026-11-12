@@ -86,4 +86,42 @@ return {
 			})
 		end,
 	},
+	{
+		"sindrets/diffview.nvim",
+		cmd = {
+			"DiffviewOpen",
+			"DiffviewClose",
+			"DiffviewToggleFiles",
+			"DiffviewFocusFiles",
+			"DiffviewRefresh",
+			"DiffviewFileHistory",
+		},
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"nvim-tree/nvim-web-devicons",
+		},
+		opts = {
+			enhanced_diff_hl = true,
+			view = {
+				default = { layout = "diff2_horizontal" },
+				merge_tool = { layout = "diff3_horizontal" },
+			},
+		},
+		keys = {
+			{
+				"<leader>Gv",
+				function()
+					if require("diffview.lib").get_current_view() then
+						vim.cmd("DiffviewClose")
+					else
+						vim.cmd("DiffviewOpen")
+					end
+				end,
+				desc = "Git Toggle Diffview",
+			},
+			{ "<leader>Gf", "<cmd>DiffviewFileHistory %<cr>", desc = "Git File History (Diffview)" },
+			{ "<leader>GF", "<cmd>DiffviewFileHistory<cr>", desc = "Git Repository History (Diffview)" },
+			{ "<leader>Gq", "<cmd>DiffviewClose<cr>", desc = "Git Close Diffview" },
+		},
+	},
 }
