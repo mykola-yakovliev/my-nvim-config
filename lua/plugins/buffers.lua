@@ -37,9 +37,11 @@ return {
 		config = function()
 			require("bufdel").setup({
 				next = "cycle",
+				quit = false,
 			})
 
 			vim.keymap.set("n", "<leader>bd", ":BufDel<CR>", { noremap = true, silent = true })
+			vim.keymap.set("n", "<leader>ba", ":BufDelAll<CR>", { noremap = true, silent = true })
 		end,
 	},
 }
