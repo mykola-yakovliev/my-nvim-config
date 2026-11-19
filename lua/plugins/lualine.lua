@@ -9,6 +9,7 @@ return {
 			},
 			sections = {
 				lualine_a = { "mode", job_indicator },
+				lualine_c = { { "filename", path = 1 } },
 				lualine_z = { "%l/%L" },
 			},
 		}
